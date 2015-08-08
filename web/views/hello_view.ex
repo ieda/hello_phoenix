@@ -10,10 +10,9 @@ defmodule HelloPhoenix.HelloView do
   defp crontime_to_schedule(crontime) do
     case crontime do
       [min, hour, day, month, weekday, command] -> 
-        case [month, day] do
-         ["*", "*"] -> ""
-         [month, "*"] -> "#{month}月"
-         [_, _] -> ""
+        case month do
+         "*" -> ""
+         month -> "#{month}月"
         end
         <>
         case [month, day] do
