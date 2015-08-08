@@ -1,4 +1,5 @@
 <div class="jumbotron">
+  入力された実行スケジュールは以下の通りです。
   <ul>
     <%= for translated_crontab_line <- parse_query(@query) do %>
     <li><%= translated_crontab_line %></li>
