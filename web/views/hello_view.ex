@@ -10,6 +10,13 @@ defmodule HelloPhoenix.HelloView do
   defp crontime_to_schedule(crontime) do
     case crontime do
       [min, hour, day, month, _weekday, command] -> 
+        case [month, day, hour] do
+         ["*", "*", "*"] -> "毎時"
+         ["*", "*", _] -> "毎日"
+         ["*", _, _] -> "毎月"
+         [_, _, _] -> "毎年"
+        end
+        <>
         case month do
          "*" -> ""
          month -> "#{month}月"
@@ -18,21 +25,18 @@ defmodule HelloPhoenix.HelloView do
         case [month, day] do
          ["*", "*"] -> ""
          [_, "*"] -> "の"
-         ["*", day] -> "毎月#{day}日"
          [_, day] -> "#{day}日"
         end
         <>
         case [day, hour] do
          ["*", "*"] -> ""
          [_, "*"] -> "の"
-         ["*", hour] -> "毎日#{hour}時"
          [_, hour] -> "#{hour}時"
         end
         <>
-        case [hour, min] do
-         [_, "*"] -> ""
-         ["*", min] -> "毎時#{min}分"
-         [_, min] -> "#{min}分"
+        case min do
+         "*" -> ""
+         min -> "#{min}分"
         end
         <> "に#{command}"
     end
