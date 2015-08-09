@@ -9,7 +9,7 @@ defmodule HelloPhoenix.HelloView do
 
   defp crontime_to_schedule(crontime) do
     case crontime do
-      [min, hour, day, month, _weekday, command] -> 
+      [min, hour, day, month, weekday, command] -> 
         case [month, day, hour] do
          ["*", "*", "*"] -> ""
          ["*", "*", _] -> ""
@@ -24,16 +24,22 @@ defmodule HelloPhoenix.HelloView do
          [month, _, _] -> "#{month}月"
         end
         <>
+        case [weekday, day] do
+         ["*", _] -> ""
+         [weekday, "*"] -> "毎週" <> weekday_to_schedule(weekday)
+         [weekday, _] -> weekday_to_schedule(weekday)
+        end
+        <>
         case [month, day] do
          ["*", "*"] -> ""
          [_, "*"] -> "の"
          [_, day] -> "#{day}日"
         end
         <>
-        case [day, hour] do
-         ["*", "*"] -> ""
-         ["*", _] -> "毎日"
-         [_, _] -> ""
+        case [weekday, day, hour] do
+         ["*", "*", "*"] -> ""
+         ["*", "*", _] -> "毎日"
+         [_, _, _] -> ""
         end
         <>
         case [day, hour] do
@@ -53,6 +59,19 @@ defmodule HelloPhoenix.HelloView do
          min -> "#{min}分"
         end
         <> "に#{command}"
+    end
+  end
+
+  defp weekday_to_schedule(weekday) do
+    case weekday do
+      "0" -> "日曜日"
+      "1" -> "月曜日"
+      "2" -> "火曜日"
+      "3" -> "水曜日"
+      "4" -> "木曜日"
+      "5" -> "金曜日"
+      "6" -> "土曜日"
+      _ -> ""
     end
   end
 end
