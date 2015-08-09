@@ -18,7 +18,7 @@ defmodule HelloPhoenix.Mixfile do
   def application do
     [mod: {HelloPhoenix, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :mariaex]]
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment
@@ -31,7 +31,7 @@ defmodule HelloPhoenix.Mixfile do
   defp deps do
     [{:phoenix, "~> 0.16"},
      {:phoenix_ecto, "~> 0.9"},
-     {:mariaex, ">= 0.0.0"},
+     {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.0"},
      {:phoenix_live_reload, "~> 0.6", only: :dev},
      {:cowboy, "~> 1.0"}]

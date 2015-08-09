@@ -28,8 +28,8 @@ config :logger, :console, format: "[$level] $message\n"
 
 # Configure your database
 config :hello_phoenix, HelloPhoenix.Repo,
-  adapter: Ecto.Adapters.MySQL,
-  username: "root",
-  password: "",
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
   database: "hello_phoenix_dev",
   size: 10 # The amount of database connections in the pool
